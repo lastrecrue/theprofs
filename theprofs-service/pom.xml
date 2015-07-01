@@ -10,6 +10,11 @@
 	<packaging>war</packaging>
 
 	<dependencies>
+		<dependency>
+			<groupId>ma.theprofs</groupId>
+			<artifactId>theprofs-dao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>

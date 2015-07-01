@@ -1,7 +1,10 @@
 package ma.theprofs.service;
 
+import ma.theprofs.dao.DaoConfiguration;
+
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -29,6 +32,7 @@ public class WebApp extends
 	@Configuration
 	@EnableWebMvc
 	@ComponentScan("ma.theprofs.service.rest")
+	@Import({ DaoConfiguration.class })
 	public static class WebAppConfig {
 	}
 }
