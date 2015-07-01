@@ -4,11 +4,11 @@
 	version="2.1">
 	<persistence-unit name="ma.theprofs" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>ma.theprofs.dao.model.Annonce</class>
 		<class>ma.theprofs.dao.model.Cour</class>
-		<class>ma.theprofs.dao.model.Droit</class>
+		<class>ma.theprofs.dao.model.NoteProf</class>
+		<class>ma.theprofs.dao.model.NoteProfPK</class>
 		<class>ma.theprofs.dao.model.Personne</class>
-		<class>ma.theprofs.dao.model.Seance</class>
-		<class>ma.theprofs.dao.model.TypeCour</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/theprofs" />

@@ -1,8 +1,8 @@
 package ma.theprofs.dao;
 
 import static org.junit.Assert.assertEquals;
-import ma.theprofs.dao.model.TypeCour;
-import ma.theprofs.dao.repository.TypeCourRepository;
+import ma.theprofs.dao.model.Cour;
+import ma.theprofs.dao.repository.CourRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,26 +15,26 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @ContextConfiguration(classes = DaoConfiguration.class)
-public class TypeCourRepositoryTest {
+public class CourRepositoryTest {
 
 	@Autowired
-	TypeCourRepository typeCourRepository;
-	TypeCour typeCour;
+	CourRepository courRepository;
+	Cour cour;
 
 	@Before
 	public void setUp() {
-		typeCour = new TypeCour();
-		typeCour.setLibelle("libelle");
-		typeCour.setNiveau("niveau");
-		typeCour.setType("type");
+		cour = new Cour();
+		cour.setLibelle("libelle");
+		cour.setNiveau("niveau");
+		cour.setType("type");
 	}
 
 	@Test
-	public void findSavedUserById() {
+	public void findSavedUser() {
 
-		typeCour = typeCourRepository.save(typeCour);
+		cour = courRepository.save(cour);
 
-		assertEquals(typeCour, typeCourRepository.findOne(typeCour.getId()));
+		assertEquals(cour, courRepository.findOne(cour.getId()));
 	}
 
 }

@@ -4,18 +4,19 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
 /**
  * The persistent class for the personne database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Personne.findAll", query = "SELECT p FROM Personne p")
+@NamedQuery(name="Personne.findAll", query="SELECT p FROM Personne p")
 public class Personne implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 
 	private String email;
 
@@ -25,28 +26,22 @@ public class Personne implements Serializable {
 
 	private String pwd;
 
-	// bi-directional many-to-one association to Cour
-	@OneToMany(mappedBy = "prof")
-	private List<Cour> coursDonnes;
+	//bi-directional many-to-one association to Annonce
+	@OneToMany(mappedBy="personne")
+	private List<Annonce> annonces;
 
-	// bi-directional many-to-many association to Cour
-	@ManyToMany
-	@JoinTable(name = "personne_has_cours", joinColumns = { @JoinColumn(name = "eleve_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "cours_id", referencedColumnName = "id") })
-	private List<Cour> coursSuivie;
-
-	// bi-directional many-to-many association to Droit
-	@ManyToMany
-	@JoinTable(name = "droit_has_personne", joinColumns = { @JoinColumn(name = "personne_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "droit_id", referencedColumnName = "id") })
-	private List<Droit> droits;
+	//bi-directional many-to-one association to NoteProf
+	@OneToMany(mappedBy="prof")
+	private List<NoteProf> notes;
 
 	public Personne() {
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -82,42 +77,48 @@ public class Personne implements Serializable {
 		this.pwd = pwd;
 	}
 
-	public List<Cour> getCoursDonnes() {
-		return this.coursDonnes;
+	public List<Annonce> getAnnonces() {
+		return this.annonces;
 	}
 
-	public void setCoursDonnes(List<Cour> coursDonnes) {
-		this.coursDonnes = coursDonnes;
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
 	}
 
-	public Cour addCoursDonne(Cour coursDonne) {
-		getCoursDonnes().add(coursDonne);
-		coursDonne.setProf(this);
+	public Annonce addAnnonce(Annonce annonce) {
+		getAnnonces().add(annonce);
+		annonce.setPersonne(this);
 
-		return coursDonne;
+		return annonce;
 	}
 
-	public Cour removeCoursDonne(Cour coursDonne) {
-		getCoursDonnes().remove(coursDonne);
-		coursDonne.setProf(null);
+	public Annonce removeAnnonce(Annonce annonce) {
+		getAnnonces().remove(annonce);
+		annonce.setPersonne(null);
 
-		return coursDonne;
+		return annonce;
 	}
 
-	public List<Cour> getCoursSuivie() {
-		return this.coursSuivie;
+	public List<NoteProf> getNotes() {
+		return this.notes;
 	}
 
-	public void setCoursSuivie(List<Cour> coursSuivie) {
-		this.coursSuivie = coursSuivie;
+	public void setNotes(List<NoteProf> notes) {
+		this.notes = notes;
 	}
 
-	public List<Droit> getDroits() {
-		return this.droits;
+	public NoteProf addNote(NoteProf note) {
+		getNotes().add(note);
+		note.setProf(this);
+
+		return note;
 	}
 
-	public void setDroits(List<Droit> droits) {
-		this.droits = droits;
+	public NoteProf removeNote(NoteProf note) {
+		getNotes().remove(note);
+		note.setProf(null);
+
+		return note;
 	}
 
 }

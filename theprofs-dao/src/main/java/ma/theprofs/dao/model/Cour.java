@@ -1,18 +1,8 @@
 package ma.theprofs.dao.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
 /**
@@ -27,91 +17,73 @@ public class Cour implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private int id;
 
-	private String discription;
+	private String libelle;
 
-	//bi-directional many-to-one association to Personne
-	@ManyToOne
-	@JoinColumn(name="prof_id")
-	private Personne prof;
+	private String niveau;
 
-	//bi-directional many-to-many association to Personne
-	@ManyToMany(mappedBy="coursSuivie")
-	private List<Personne> eleve;
+	private String type;
 
-	//bi-directional many-to-one association to TypeCour
-	@ManyToOne
-	@JoinColumn(name="type_cours_id")
-	private TypeCour typeCour;
-
-	//bi-directional many-to-one association to Seance
+	//bi-directional many-to-one association to Annonce
 	@OneToMany(mappedBy="cour")
-	private List<Seance> seances;
+	private List<Annonce> annonces;
 
 	public Cour() {
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getDiscription() {
-		return this.discription;
+	public String getLibelle() {
+		return this.libelle;
 	}
 
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
 
-	public Personne getProf() {
-		return this.prof;
+	public String getNiveau() {
+		return this.niveau;
 	}
 
-	public void setProf(Personne prof) {
-		this.prof = prof;
+	public void setNiveau(String niveau) {
+		this.niveau = niveau;
 	}
 
-	public List<Personne> getEleve() {
-		return this.eleve;
+	public String getType() {
+		return this.type;
 	}
 
-	public void setEleve(List<Personne> eleve) {
-		this.eleve = eleve;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public TypeCour getTypeCour() {
-		return this.typeCour;
+	public List<Annonce> getAnnonces() {
+		return this.annonces;
 	}
 
-	public void setTypeCour(TypeCour typeCour) {
-		this.typeCour = typeCour;
+	public void setAnnonces(List<Annonce> annonces) {
+		this.annonces = annonces;
 	}
 
-	public List<Seance> getSeances() {
-		return this.seances;
+	public Annonce addAnnonce(Annonce annonce) {
+		getAnnonces().add(annonce);
+		annonce.setCour(this);
+
+		return annonce;
 	}
 
-	public void setSeances(List<Seance> seances) {
-		this.seances = seances;
-	}
+	public Annonce removeAnnonce(Annonce annonce) {
+		getAnnonces().remove(annonce);
+		annonce.setCour(null);
 
-	public Seance addSeance(Seance seance) {
-		getSeances().add(seance);
-		seance.setCour(this);
-
-		return seance;
-	}
-
-	public Seance removeSeance(Seance seance) {
-		getSeances().remove(seance);
-		seance.setCour(null);
-
-		return seance;
+		return annonce;
 	}
 
 }
