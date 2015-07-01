@@ -26,7 +26,7 @@ public class Cour implements Serializable {
 	private String type;
 
 	//bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy="cour")
+	@OneToMany(mappedBy="cour",fetch=FetchType.EAGER)
 	private List<Annonce> annonces;
 
 	public Cour() {

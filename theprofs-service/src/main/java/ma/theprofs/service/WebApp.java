@@ -5,12 +5,9 @@ import ma.theprofs.dao.DaoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-//@Configuration
-//@ComponentScan({ "ma.theprofs.dao" })
-//@PropertySource(value = { "classpath:services.properties" })
 
 public class WebApp extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
@@ -32,6 +29,7 @@ public class WebApp extends
 	@Configuration
 	@EnableWebMvc
 	@ComponentScan("ma.theprofs.service.rest")
+	@PropertySource(value = { "classpath:services.properties" })
 	@Import({ DaoConfiguration.class })
 	public static class WebAppConfig {
 	}

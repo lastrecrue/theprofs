@@ -12,19 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/service/greeting")
-public class RestServiceController {
+public class CourServiceController {
 
 	@Autowired
 	private CourRepository courRepository;
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
-	public @ResponseBody String getGreeting(@PathVariable String name) {
-		String result = "Hello " + name;
-		Iterable<Cour> cours = courRepository.findAll();
-		for (Cour cour : cours) {
-			result+=cour;
-		}
-		return result;
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET,headers="Accept=application/json")
+	public @ResponseBody Cour findById(@PathVariable Integer id) {
+		Cour cour =courRepository.findOne(id);
+		return cour;
 	}
 
 }
