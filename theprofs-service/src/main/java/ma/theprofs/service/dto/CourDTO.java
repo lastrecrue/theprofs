@@ -1,24 +1,15 @@
-package ma.theprofs.dao.model;
+package ma.theprofs.service.dto;
 
 import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.List;
-
 
 /**
  * The persistent class for the cours database table.
  * 
  */
-@Entity
-@Table(name="cours")
-@NamedQuery(name="Cour.findAll", query="SELECT c FROM Cour c")
-public class Cour implements Serializable {
+public class CourDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String libelle;
@@ -27,11 +18,10 @@ public class Cour implements Serializable {
 
 	private String type;
 
-	//bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy="cour",fetch=FetchType.EAGER)
-	private List<Annonce> annonces;
+	// bi-directional many-to-one association to AnnonceDTO
+	private List<AnnonceDTO> annonces;
 
-	public Cour() {
+	public CourDTO() {
 	}
 
 	public int getId() {
@@ -66,23 +56,23 @@ public class Cour implements Serializable {
 		this.type = type;
 	}
 
-	public List<Annonce> getAnnonces() {
+	public List<AnnonceDTO> getAnnonceDTOs() {
 		return this.annonces;
 	}
 
-	public void setAnnonces(List<Annonce> annonces) {
+	public void setAnnonceDTOs(List<AnnonceDTO> annonces) {
 		this.annonces = annonces;
 	}
 
-	public Annonce addAnnonce(Annonce annonce) {
-		getAnnonces().add(annonce);
+	public AnnonceDTO addAnnonceDTO(AnnonceDTO annonce) {
+		getAnnonceDTOs().add(annonce);
 		annonce.setCour(this);
 
 		return annonce;
 	}
 
-	public Annonce removeAnnonce(Annonce annonce) {
-		getAnnonces().remove(annonce);
+	public AnnonceDTO removeAnnonceDTO(AnnonceDTO annonce) {
+		getAnnonceDTOs().remove(annonce);
 		annonce.setCour(null);
 
 		return annonce;

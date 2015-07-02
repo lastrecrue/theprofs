@@ -1,4 +1,4 @@
-package ma.theprofs.dao;
+package ma.theprofs;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -44,6 +44,7 @@ public class DaoConfiguration {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setGenerateDdl(true);
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		factory.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan("ma.theprofs.dao.model");
 		factory.setDataSource(dataSource());

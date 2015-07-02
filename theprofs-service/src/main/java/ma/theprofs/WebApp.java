@@ -1,6 +1,6 @@
-package ma.theprofs.service;
+package ma.theprofs;
 
-import ma.theprofs.dao.DaoConfiguration;
+import ma.theprofs.DaoConfiguration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class WebApp extends
 
 	@Configuration
 	@EnableWebMvc
-	@ComponentScan("ma.theprofs.service.rest")
+	@ComponentScan(basePackages={"ma.theprofs.service","ma.theprofs.service.rest"})
 	@PropertySource(value = { "classpath:services.properties" })
 	@Import({ DaoConfiguration.class })
 	public static class WebAppConfig {

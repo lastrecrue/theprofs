@@ -1,36 +1,25 @@
-package ma.theprofs.dao.model;
+package ma.theprofs.service.dto;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
 /**
  * The persistent class for the annonce database table.
  * 
  */
-@Entity
-@NamedQuery(name = "Annonce.findAll", query = "SELECT a FROM Annonce a")
-public class Annonce implements Serializable {
+public class AnnonceDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String discription;
 
-	// bi-directional many-to-one association to Personne
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "prof_id")
-	private Personne personne;
+	private PersonneDTO personne;
 
-	// bi-directional many-to-one association to Cour
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "type_cours_id")
-	private Cour cour;
+	private CourDTO cour;
 
 	private String ville;
 
-	public Annonce() {
+	public AnnonceDTO() {
 	}
 
 	public int getId() {
@@ -49,19 +38,19 @@ public class Annonce implements Serializable {
 		this.discription = discription;
 	}
 
-	public Personne getPersonne() {
+	public PersonneDTO getPersonne() {
 		return this.personne;
 	}
 
-	public void setPersonne(Personne personne) {
+	public void setPersonne(PersonneDTO personne) {
 		this.personne = personne;
 	}
 
-	public Cour getCour() {
+	public CourDTO getCour() {
 		return this.cour;
 	}
 
-	public void setCour(Cour cour) {
+	public void setCour(CourDTO cour) {
 		this.cour = cour;
 	}
 

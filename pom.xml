@@ -19,6 +19,8 @@
 		<slf4j-log4j12-version>1.7.12</slf4j-log4j12-version>
 		<spring-web-version>4.1.7.RELEASE</spring-web-version>
 		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
+		<junit-version>4.12</junit-version>
+		<jackson-databind-version>2.5.4</jackson-databind-version>
 	</properties>
 
 	<dependencyManagement>
@@ -52,6 +54,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-databind-version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector-java-version}</version>
@@ -80,6 +88,13 @@
 			</dependency>
 
 			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit-version}</version>
+			</dependency>
+
+
+			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j-log4j12-version}</version>
@@ -87,4 +102,26 @@
 
 		</dependencies>
 	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<!-- <webappDirectory>/sample/servlet/container/deploy/directory</webappDirectory> -->
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
