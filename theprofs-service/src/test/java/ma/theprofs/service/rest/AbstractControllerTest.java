@@ -1,6 +1,6 @@
 package ma.theprofs.service.rest;
 
-import java.nio.charset.Charset;
+import java.io.IOException;
 
 import ma.theprofs.WebApp.WebAppConfig;
 
@@ -14,6 +14,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WebAppConfig.class)
@@ -30,12 +33,17 @@ public class AbstractControllerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
-	// @Autowired
-	// private PersonneServiceController personneServiceController;
-
 	@Before
 	public void setup() throws Exception {
 		this.mockMvc = MockMvcBuilders
 				.webAppContextSetup(webApplicationContext).build();
+	}
+
+	
+
+	protected String json(Object o) throws IOException {
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		String json = ow.writeValueAsString(o);
+		return json;
 	}
 }

@@ -4,6 +4,7 @@ import ma.theprofs.service.CourService;
 import ma.theprofs.service.dto.CourDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,11 @@ public class CourServiceController {
 	public @ResponseBody Iterable<CourDTO> findAll() {
 		Iterable<CourDTO> cours = service.findAll();
 		return cours;
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json", headers = "Accept=application/json")
+	public CourDTO registerCour(@RequestBody CourDTO cour) throws Exception {
+		return service.add(cour);
 	}
 
 }
