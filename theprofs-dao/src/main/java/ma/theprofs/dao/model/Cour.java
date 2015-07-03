@@ -6,19 +6,18 @@ import javax.persistence.*;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the cours database table.
  * 
  */
 @Entity
-@Table(name="cours")
-@NamedQuery(name="Cour.findAll", query="SELECT c FROM Cour c")
+@Table(name = "cours")
+@NamedQuery(name = "Cour.findAll", query = "SELECT c FROM Cour c")
 public class Cour implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String libelle;
@@ -27,8 +26,8 @@ public class Cour implements Serializable {
 
 	private String type;
 
-	//bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy="cour",fetch=FetchType.EAGER)
+	// bi-directional many-to-one association to Annonce
+	@OneToMany(mappedBy = "cour")
 	private List<Annonce> annonces;
 
 	public Cour() {

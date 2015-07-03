@@ -20,12 +20,12 @@ public class NoteProf implements Serializable {
 	private int note;
 
 	//uni-directional many-to-one association to Personne
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="eleve_id",referencedColumnName="id",insertable=false, updatable=false)
 	private Personne eleve;
 
 	//bi-directional many-to-one association to Personne
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="prof_id",referencedColumnName="id",insertable=false, updatable=false)
 	private Personne prof;
 

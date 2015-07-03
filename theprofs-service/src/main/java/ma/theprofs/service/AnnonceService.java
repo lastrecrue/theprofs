@@ -10,6 +10,7 @@ import ma.theprofs.dao.model.Personne;
 import ma.theprofs.dao.model.criterion.AnnonceCriterion;
 import ma.theprofs.dao.repository.AnnonceRepository;
 import ma.theprofs.service.dto.AnnonceDTO;
+import ma.theprofs.service.dto.Converter;
 import ma.theprofs.service.dto.CourDTO;
 import ma.theprofs.service.dto.PersonneDTO;
 
@@ -35,24 +36,18 @@ public class AnnonceService extends AbstractService<Annonce, AnnonceDTO> {
 
 	@Override
 	protected Annonce convertToEntity(AnnonceDTO dto) {
-		Annonce annonce = new Annonce();
-		BeanUtils.copyProperties(dto, annonce);
+		Annonce annonce = Converter.convert(dto);
 		return annonce;
 	}
 
+	
+
 	@Override
 	protected AnnonceDTO converttoDTO(Annonce entity) {
-		AnnonceDTO annonce = new AnnonceDTO();
-		BeanUtils.copyProperties(entity, annonce);
-		Cour cour = entity.getCour();
-		CourDTO courDTO = new CourDTO();
-		BeanUtils.copyProperties(cour, courDTO);
-		annonce.setCour(courDTO);
-		Personne personne=entity.getPersonne();
-		PersonneDTO personneDTO = new PersonneDTO();
-		BeanUtils.copyProperties(personne, personneDTO);
-		annonce.setPersonne(personneDTO);
+		AnnonceDTO annonce = Converter.convert(entity);
 		return annonce;
 	}
+
+	
 
 }

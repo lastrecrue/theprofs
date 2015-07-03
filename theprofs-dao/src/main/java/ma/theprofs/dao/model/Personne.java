@@ -29,11 +29,11 @@ public class Personne implements Serializable {
 	private String pwd;
 
 	//bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy="personne",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="personne")
 	private List<Annonce> annonces;
 
 	//bi-directional many-to-one association to NoteProf
-	@OneToMany(mappedBy="prof",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="prof")
 	private List<NoteProf> notes;
 
 	public Personne() {

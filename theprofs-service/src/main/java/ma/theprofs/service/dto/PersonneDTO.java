@@ -1,10 +1,6 @@
 package ma.theprofs.service.dto;
 
 import java.io.Serializable;
-import java.util.List;
-
-import ma.theprofs.dao.model.Annonce;
-import ma.theprofs.dao.model.NoteProf;
 
 public class PersonneDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,9 +15,7 @@ public class PersonneDTO implements Serializable {
 
 	private String pwd;
 
-	private List<AnnonceDTO> annonces;
-
-	private List<NoteProfDTO> notes;
+	private Float note;
 
 	public PersonneDTO() {
 	}
@@ -66,48 +60,12 @@ public class PersonneDTO implements Serializable {
 		this.pwd = pwd;
 	}
 
-	public List<AnnonceDTO> getAnnonces() {
-		return this.annonces;
+	public Float getNote() {
+		return this.note;
 	}
 
-	public void setAnnonces(List<AnnonceDTO> annonces) {
-		this.annonces = annonces;
-	}
-
-	public AnnonceDTO addAnnonce(AnnonceDTO annonce) {
-		getAnnonces().add(annonce);
-		annonce.setPersonne(this);
-
-		return annonce;
-	}
-
-	public AnnonceDTO removeAnnonce(AnnonceDTO annonce) {
-		getAnnonces().remove(annonce);
-		annonce.setPersonne(null);
-
-		return annonce;
-	}
-
-	public List<NoteProfDTO> getNotes() {
-		return this.notes;
-	}
-
-	public void setNotes(List<NoteProfDTO> notes) {
-		this.notes = notes;
-	}
-
-	public NoteProfDTO addNote(NoteProfDTO note) {
-		getNotes().add(note);
-		note.setProf(this);
-
-		return note;
-	}
-
-	public NoteProfDTO removeNote(NoteProfDTO note) {
-		getNotes().remove(note);
-		note.setProf(null);
-
-		return note;
+	public void setNote(Float note) {
+		this.note = note;
 	}
 
 }
