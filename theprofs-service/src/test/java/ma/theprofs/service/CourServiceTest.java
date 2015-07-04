@@ -36,7 +36,7 @@ public class CourServiceTest {
 
 		cour = service.add(cour);
 
-		assertEquals(cour, service.findById(cour.getId()));
+		assertEquals(cour.getId(), service.findById(cour.getId()).getId());
 	}
 
 }

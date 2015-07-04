@@ -1,16 +1,12 @@
 package ma.theprofs.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import ma.theprofs.dao.model.Annonce;
 import ma.theprofs.dao.model.Cour;
 import ma.theprofs.dao.model.Personne;
-import ma.theprofs.dao.model.criterion.AnnonceCriterion;
 import ma.theprofs.dao.repository.AnnonceRepository;
 import ma.theprofs.service.dto.AnnonceDTO;
-import ma.theprofs.service.dto.Converter;
 import ma.theprofs.service.dto.CourDTO;
 import ma.theprofs.service.dto.PersonneDTO;
 
@@ -28,26 +24,42 @@ public class AnnonceService extends AbstractService<Annonce, AnnonceDTO> {
 		return repository;
 	}
 
-	public List<AnnonceDTO> findAnnoncesByCriterion(
-			AnnonceCriterion annonceCriterion) {
-		// TODO
-		return null;
-	}
-
 	@Override
 	protected Annonce convertToEntity(AnnonceDTO dto) {
-		Annonce annonce = Converter.convert(dto);
+		Annonce annonce = convert(dto);
+		Cour cour = new Cour();
+		BeanUtils.copyProperties(dto.getCour(), cour);
+		annonce.setCour(cour);
+		Personne personne = new Personne();
+		BeanUtils.copyProperties(dto.getPersonne(), personne);
+		annonce.setPersonne(personne);
 		return annonce;
 	}
 
-	
+	public Annonce convert(AnnonceDTO dto) {
+		Annonce annonce = new Annonce();
+		BeanUtils.copyProperties(dto, annonce);
+		return annonce;
+	}
 
 	@Override
 	protected AnnonceDTO converttoDTO(Annonce entity) {
-		AnnonceDTO annonce = Converter.convert(entity);
+		AnnonceDTO annonce = new AnnonceDTO();
+
+		BeanUtils.copyProperties(entity, annonce);
+		Cour cour = entity.getCour();
+		CourDTO courDTO = new CourDTO();
+		BeanUtils.copyProperties(cour, courDTO, "annonces");
+		annonce.setCour(courDTO);
+		Personne personne = entity.getPersonne();
+		PersonneDTO personneDTO = new PersonneDTO();
+		BeanUtils.copyProperties(personne, personneDTO, "annonces", "notes");
+		annonce.setPersonne(personneDTO);
 		return annonce;
 	}
 
-	
+	public Iterable<AnnonceDTO> findByVilleTypeAndNiveau(String ville, String type, String niveau) {
+		return convertToDTOs(repository.findByVilleTypeAndNiveau(ville, type, niveau));
+	}
 
 }

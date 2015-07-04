@@ -21,12 +21,11 @@ public abstract class AbstractService<Entity, DTO> {
 
 	public List<DTO> findAll() {
 		Iterable<Entity> entitys = getRepository().findAll();
-
 		List<DTO> dTOs = convertToDTOs(entitys);
 		return dTOs;
 	}
 
-	private List<DTO> convertToDTOs(Iterable<Entity> entitys) {
+	protected List<DTO> convertToDTOs(Iterable<Entity> entitys) {
 		List<DTO> dTOs = new ArrayList<DTO>();
 		for (Entity entity : entitys) {
 			dTOs.add(converttoDTO(entity));

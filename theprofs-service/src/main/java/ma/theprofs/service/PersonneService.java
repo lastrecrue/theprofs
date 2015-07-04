@@ -5,9 +5,11 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import ma.theprofs.dao.model.NoteProf;
+import ma.theprofs.dao.model.NoteProfPK;
 import ma.theprofs.dao.model.Personne;
 import ma.theprofs.dao.repository.NoteRepository;
 import ma.theprofs.dao.repository.PersonneRepository;
+import ma.theprofs.service.dto.NoteProfDTO;
 import ma.theprofs.service.dto.PersonneDTO;
 
 import org.springframework.beans.BeanUtils;
@@ -22,7 +24,6 @@ public class PersonneService extends AbstractService<Personne, PersonneDTO> {
 
 	@Autowired
 	private NoteRepository noteRepository;
-	
 
 	public PersonneRepository getRepository() {
 		return repository;
@@ -46,9 +47,24 @@ public class PersonneService extends AbstractService<Personne, PersonneDTO> {
 				note += noteProf.getNote();
 			}
 			personne.setNote(note / notes.size());
-		}else{
+		} else {
 			personne.setNote(Float.valueOf("0.0"));
 		}
 		return personne;
+	}
+
+	public void addNote(NoteProfDTO noteProfDTO) {
+		NoteProf noteProf = convertNote(noteProfDTO);
+		noteRepository.save(noteProf);
+	}
+
+	private NoteProf convertNote(NoteProfDTO noteProfDTO) {
+		NoteProf noteProf = new NoteProf();
+		noteProf.setNote(noteProfDTO.getNote());
+		NoteProfPK noteProfPK = new NoteProfPK();
+		noteProfPK.setEleveId(noteProfDTO.getEleveId());
+		noteProfPK.setProfId(noteProfDTO.getProfId());
+		noteProf.setId(noteProfPK);
+		return noteProf;
 	}
 }

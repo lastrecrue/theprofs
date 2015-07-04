@@ -9,23 +9,13 @@ import java.io.Serializable;
 public class NoteProfDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private NoteProfPKDTO id;
+	private int eleveId;
+
+	private int profId;
 
 	private int note;
 
-	private PersonneDTO eleve;
-
-	private PersonneDTO prof;
-
 	public NoteProfDTO() {
-	}
-
-	public NoteProfPKDTO getId() {
-		return this.id;
-	}
-
-	public void setId(NoteProfPKDTO id) {
-		this.id = id;
 	}
 
 	public int getNote() {
@@ -36,20 +26,20 @@ public class NoteProfDTO implements Serializable {
 		this.note = note;
 	}
 
-	public PersonneDTO getEleve() {
-		return this.eleve;
+	public int getEleveId() {
+		return eleveId;
 	}
 
-	public void setEleve(PersonneDTO eleve) {
-		this.eleve = eleve;
+	public void setEleveId(int eleveId) {
+		this.eleveId = eleveId;
 	}
 
-	public PersonneDTO getProf() {
-		return this.prof;
+	public int getProfId() {
+		return profId;
 	}
 
-	public void setProf(PersonneDTO prof) {
-		this.prof = prof;
+	public void setProfId(int profId) {
+		this.profId = profId;
 	}
 
 }

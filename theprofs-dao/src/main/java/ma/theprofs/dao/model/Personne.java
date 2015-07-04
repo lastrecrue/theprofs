@@ -6,18 +6,17 @@ import javax.persistence.*;
 
 import java.util.List;
 
-
 /**
  * The persistent class for the personne database table.
  * 
  */
 @Entity
-@NamedQuery(name="Personne.findAll", query="SELECT p FROM Personne p")
+@NamedQuery(name = "Personne.findAll", query = "SELECT p FROM Personne p")
 public class Personne implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String email;
@@ -28,12 +27,12 @@ public class Personne implements Serializable {
 
 	private String pwd;
 
-	//bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy="personne")
+	// bi-directional many-to-one association to Annonce
+	@OneToMany(mappedBy = "personne")
 	private List<Annonce> annonces;
 
-	//bi-directional many-to-one association to NoteProf
-	@OneToMany(mappedBy="prof")
+	// bi-directional many-to-one association to NoteProf
+	@OneToMany(mappedBy = "prof")
 	private List<NoteProf> notes;
 
 	public Personne() {

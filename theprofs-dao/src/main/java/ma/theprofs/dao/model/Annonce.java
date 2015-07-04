@@ -19,12 +19,12 @@ public class Annonce implements Serializable {
 	private String discription;
 
 	// bi-directional many-to-one association to Personne
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "prof_id")
 	private Personne personne;
 
 	// bi-directional many-to-one association to Cour
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "type_cours_id")
 	private Cour cour;
 
