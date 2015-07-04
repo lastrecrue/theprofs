@@ -142,10 +142,5 @@
 		</plugins>
 	</build>
 
-	<scm>
-		<url>https://github.com/lastrecrue/theprofs</url>
-		<connection>scm:git:git://github.com/lastrecrue/theprofs.git</connection>
-		<developerConnection>scm:git:git@github.com:lastrecrue/theprofs.git</developerConnection>
-	</scm>
 
 </project>
