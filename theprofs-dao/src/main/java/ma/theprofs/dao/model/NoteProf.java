@@ -11,56 +11,56 @@ import javax.persistence.*;
 @Table(name = "note_prof")
 @NamedQuery(name = "NoteProf.findAll", query = "SELECT n FROM NoteProf n")
 public class NoteProf implements Serializable {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private NoteProfPK id;
+  @EmbeddedId
+  private NoteProfPK id;
 
-	private int note;
+  private int note;
 
-	// uni-directional many-to-one association to Personne
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "eleve_id", referencedColumnName = "id", insertable = false, updatable = false)
-	private Personne eleve;
+  // uni-directional many-to-one association to Personne
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "eleve_id", referencedColumnName = "id", insertable = false, updatable = false)
+  private Personne eleve;
 
-	// bi-directional many-to-one association to Personne
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "prof_id", referencedColumnName = "id", insertable = false, updatable = false)
-	private Personne prof;
+  // bi-directional many-to-one association to Personne
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "prof_id", referencedColumnName = "id", insertable = false, updatable = false)
+  private Personne prof;
 
-	public NoteProf() {
-	}
+  public NoteProf() {
+  }
 
-	public NoteProfPK getId() {
-		return this.id;
-	}
+  public NoteProfPK getId() {
+    return this.id;
+  }
 
-	public void setId(NoteProfPK id) {
-		this.id = id;
-	}
+  public void setId(NoteProfPK id) {
+    this.id = id;
+  }
 
-	public int getNote() {
-		return this.note;
-	}
+  public int getNote() {
+    return this.note;
+  }
 
-	public void setNote(int note) {
-		this.note = note;
-	}
+  public void setNote(int note) {
+    this.note = note;
+  }
 
-	public Personne getEleve() {
-		return this.eleve;
-	}
+  public Personne getEleve() {
+    return this.eleve;
+  }
 
-	public void setEleve(Personne eleve) {
-		this.eleve = eleve;
-	}
+  public void setEleve(Personne eleve) {
+    this.eleve = eleve;
+  }
 
-	public Personne getProf() {
-		return this.prof;
-	}
+  public Personne getProf() {
+    return this.prof;
+  }
 
-	public void setProf(Personne prof) {
-		this.prof = prof;
-	}
+  public void setProf(Personne prof) {
+    this.prof = prof;
+  }
 
 }

@@ -1,7 +1,9 @@
 package ma.theprofs;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,36 +25,53 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:application.properties" })
 @EnableJpaRepositories(basePackages = { "ma.theprofs.dao.repository" })
 public class DaoConfiguration {
-	@Autowired
-	private Environment environment;
+  @Autowired
+  private Environment environment;
 
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
-		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-		dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
-		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
-		return dataSource;
-	}
+  // @Bean
+  // public DataSource dataSource() {
+  // DriverManagerDataSource dataSource = new DriverManagerDataSource();
+  // dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+  // dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+  // dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+  // dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+  // return dataSource;
+  // }
 
-	@Bean
-	public EntityManagerFactory entityManagerFactory() {
-		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setGenerateDdl(true);
-		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-		factory.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
-		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("ma.theprofs.dao.model");
-		factory.setDataSource(dataSource());
-		factory.afterPropertiesSet();
-		return factory.getObject();
-	}
+  @Bean
+  public DriverManagerDataSource dataSource() throws URISyntaxException {
+    URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		JpaTransactionManager txManager = new JpaTransactionManager();
-		txManager.setEntityManagerFactory(entityManagerFactory());
-		return txManager;
-	}
+    String username = dbUri.getUserInfo().split(":")[0];
+    String password = dbUri.getUserInfo().split(":")[1];
+    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+    dataSource.setUrl(dbUrl);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
+
+    return dataSource;
+  }
+
+  @Bean
+  public EntityManagerFactory entityManagerFactory() throws URISyntaxException {
+    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setGenerateDdl(true);
+    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+    factory.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
+    factory.setJpaVendorAdapter(vendorAdapter);
+    factory.setPackagesToScan("ma.theprofs.dao.model");
+    factory.setDataSource(dataSource());
+    factory.afterPropertiesSet();
+    return factory.getObject();
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager() throws URISyntaxException {
+    JpaTransactionManager txManager = new JpaTransactionManager();
+    txManager.setEntityManagerFactory(entityManagerFactory());
+    return txManager;
+  }
 }

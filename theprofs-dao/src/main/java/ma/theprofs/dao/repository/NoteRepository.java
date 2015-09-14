@@ -9,6 +9,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface NoteRepository extends PagingAndSortingRepository<NoteProf, Integer> {
 
-	List<NoteProf> findByProf(Personne prof);
+  List<NoteProf> findByProf(Personne prof);
 
 }

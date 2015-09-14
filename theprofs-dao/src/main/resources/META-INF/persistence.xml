@@ -1,25 +1,38 @@
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-	version="2.1">
-	<persistence-unit name="ma.theprofs" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>ma.theprofs.dao.model.Annonce</class>
-		<class>ma.theprofs.dao.model.Cour</class>
-		<class>ma.theprofs.dao.model.NoteProf</class>
-		<class>ma.theprofs.dao.model.NoteProfPK</class>
-		<class>ma.theprofs.dao.model.Personne</class>
-		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/theprofs" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="root" />
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+  <persistence-unit name="ma.theprofs"
+    transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>ma.theprofs.dao.model.Annonce</class>
+    <class>ma.theprofs.dao.model.Cour</class>
+    <class>ma.theprofs.dao.model.NoteProf</class>
+    <class>ma.theprofs.dao.model.NoteProfPK</class>
+    <class>ma.theprofs.dao.model.Personne</class>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+      <!-- value="create" to build a new database on each run; value="update" 
+        to modify an existing database; value="create-drop" means the same as "create" 
+        but also drops tables when Hibernate closes; value="validate" makes no changes 
+        to the database -->
+      <property name="hibernate.hbm2ddl.auto" value="create" />
+      <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+      <property name="hibernate.connection.charSet" value="UTF-8" />
+      <!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" 
+        /> -->
+      <!-- <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/theprofs" 
+        /> -->
+      <!-- <property name="javax.persistence.jdbc.user" value="root" /> -->
+      <!-- <property name="javax.persistence.jdbc.password" value="root" 
+        /> -->
 
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-		</properties>
+      <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" 
+        /> -->
+      <!-- <property name="hibernate.show_sql" value="true" /> -->
+      <!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
+    </properties>
 
-	</persistence-unit>
+  </persistence-unit>
 
 </persistence>

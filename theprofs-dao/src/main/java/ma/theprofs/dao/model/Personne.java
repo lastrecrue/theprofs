@@ -13,113 +13,113 @@ import java.util.List;
 @Entity
 @NamedQuery(name = "Personne.findAll", query = "SELECT p FROM Personne p")
 public class Personne implements Serializable {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private int id;
 
-	private String email;
+  private String email;
 
-	private String nom;
+  private String nom;
 
-	private String prenom;
+  private String prenom;
 
-	private String pwd;
+  private String pwd;
 
-	// bi-directional many-to-one association to Annonce
-	@OneToMany(mappedBy = "personne")
-	private List<Annonce> annonces;
+  // bi-directional many-to-one association to Annonce
+  @OneToMany(mappedBy = "personne")
+  private List<Annonce> annonces;
 
-	// bi-directional many-to-one association to NoteProf
-	@OneToMany(mappedBy = "prof")
-	private List<NoteProf> notes;
+  // bi-directional many-to-one association to NoteProf
+  @OneToMany(mappedBy = "prof")
+  private List<NoteProf> notes;
 
-	public Personne() {
-	}
+  public Personne() {
+  }
 
-	public int getId() {
-		return this.id;
-	}
+  public int getId() {
+    return this.id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public String getEmail() {
-		return this.email;
-	}
+  public String getEmail() {
+    return this.email;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public String getNom() {
-		return this.nom;
-	}
+  public String getNom() {
+    return this.nom;
+  }
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+  public void setNom(String nom) {
+    this.nom = nom;
+  }
 
-	public String getPrenom() {
-		return this.prenom;
-	}
+  public String getPrenom() {
+    return this.prenom;
+  }
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+  public void setPrenom(String prenom) {
+    this.prenom = prenom;
+  }
 
-	public String getPwd() {
-		return this.pwd;
-	}
+  public String getPwd() {
+    return this.pwd;
+  }
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
+  public void setPwd(String pwd) {
+    this.pwd = pwd;
+  }
 
-	public List<Annonce> getAnnonces() {
-		return this.annonces;
-	}
+  public List<Annonce> getAnnonces() {
+    return this.annonces;
+  }
 
-	public void setAnnonces(List<Annonce> annonces) {
-		this.annonces = annonces;
-	}
+  public void setAnnonces(List<Annonce> annonces) {
+    this.annonces = annonces;
+  }
 
-	public Annonce addAnnonce(Annonce annonce) {
-		getAnnonces().add(annonce);
-		annonce.setPersonne(this);
+  public Annonce addAnnonce(Annonce annonce) {
+    getAnnonces().add(annonce);
+    annonce.setPersonne(this);
 
-		return annonce;
-	}
+    return annonce;
+  }
 
-	public Annonce removeAnnonce(Annonce annonce) {
-		getAnnonces().remove(annonce);
-		annonce.setPersonne(null);
+  public Annonce removeAnnonce(Annonce annonce) {
+    getAnnonces().remove(annonce);
+    annonce.setPersonne(null);
 
-		return annonce;
-	}
+    return annonce;
+  }
 
-	public List<NoteProf> getNotes() {
-		return this.notes;
-	}
+  public List<NoteProf> getNotes() {
+    return this.notes;
+  }
 
-	public void setNotes(List<NoteProf> notes) {
-		this.notes = notes;
-	}
+  public void setNotes(List<NoteProf> notes) {
+    this.notes = notes;
+  }
 
-	public NoteProf addNote(NoteProf note) {
-		getNotes().add(note);
-		note.setProf(this);
+  public NoteProf addNote(NoteProf note) {
+    getNotes().add(note);
+    note.setProf(this);
 
-		return note;
-	}
+    return note;
+  }
 
-	public NoteProf removeNote(NoteProf note) {
-		getNotes().remove(note);
-		note.setProf(null);
+  public NoteProf removeNote(NoteProf note) {
+    getNotes().remove(note);
+    note.setProf(null);
 
-		return note;
-	}
+    return note;
+  }
 
 }
